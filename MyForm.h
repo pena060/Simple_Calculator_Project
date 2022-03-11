@@ -48,12 +48,16 @@ namespace CalculatorProject {
 
 
 
-	private: System::Windows::Forms::TextBox^ firstDigit;
+
 	private: System::Windows::Forms::Label^ Operator;
 
-	private: System::Windows::Forms::TextBox^ secondDigit;
+
 	private: System::Windows::Forms::Label^ Output;
 	private: System::Windows::Forms::Button^ rslt_btn;
+	private: System::Windows::Forms::NumericUpDown^ firstDigit;
+	private: System::Windows::Forms::NumericUpDown^ secondDigit;
+
+
 
 
 
@@ -92,11 +96,13 @@ namespace CalculatorProject {
 			this->mul_btn = (gcnew System::Windows::Forms::Button());
 			this->sub_btn = (gcnew System::Windows::Forms::Button());
 			this->add_btn = (gcnew System::Windows::Forms::Button());
-			this->firstDigit = (gcnew System::Windows::Forms::TextBox());
 			this->Operator = (gcnew System::Windows::Forms::Label());
-			this->secondDigit = (gcnew System::Windows::Forms::TextBox());
 			this->Output = (gcnew System::Windows::Forms::Label());
 			this->rslt_btn = (gcnew System::Windows::Forms::Button());
+			this->firstDigit = (gcnew System::Windows::Forms::NumericUpDown());
+			this->secondDigit = (gcnew System::Windows::Forms::NumericUpDown());
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->firstDigit))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->secondDigit))->BeginInit();
 			this->SuspendLayout();
 			// 
 			// div_btn
@@ -147,35 +153,15 @@ namespace CalculatorProject {
 			this->add_btn->UseVisualStyleBackColor = true;
 			this->add_btn->Click += gcnew System::EventHandler(this, &MyForm::Operators);
 			// 
-			// firstDigit
-			// 
-			this->firstDigit->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 27.75F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(0)));
-			this->firstDigit->Location = System::Drawing::Point(37, 40);
-			this->firstDigit->Name = L"firstDigit";
-			this->firstDigit->Size = System::Drawing::Size(201, 49);
-			this->firstDigit->TabIndex = 9;
-			this->firstDigit->TextAlign = System::Windows::Forms::HorizontalAlignment::Center;
-			// 
 			// Operator
 			// 
 			this->Operator->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 21.75F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->Operator->Location = System::Drawing::Point(262, 49);
+			this->Operator->Location = System::Drawing::Point(287, 49);
 			this->Operator->Name = L"Operator";
 			this->Operator->Size = System::Drawing::Size(50, 40);
 			this->Operator->TabIndex = 10;
 			this->Operator->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
-			// 
-			// secondDigit
-			// 
-			this->secondDigit->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 27.75F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(0)));
-			this->secondDigit->Location = System::Drawing::Point(329, 40);
-			this->secondDigit->Name = L"secondDigit";
-			this->secondDigit->Size = System::Drawing::Size(201, 49);
-			this->secondDigit->TabIndex = 11;
-			this->secondDigit->TextAlign = System::Windows::Forms::HorizontalAlignment::Center;
 			// 
 			// Output
 			// 
@@ -202,22 +188,48 @@ namespace CalculatorProject {
 			this->rslt_btn->UseVisualStyleBackColor = true;
 			this->rslt_btn->Click += gcnew System::EventHandler(this, &MyForm::rslt_btn_Click);
 			// 
+			// firstDigit
+			// 
+			this->firstDigit->DecimalPlaces = 2;
+			this->firstDigit->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 27.75F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->firstDigit->Location = System::Drawing::Point(115, 38);
+			this->firstDigit->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) { 99999999, 0, 0, 0 });
+			this->firstDigit->Minimum = System::Decimal(gcnew cli::array< System::Int32 >(4) { 99999999, 0, 0, System::Int32::MinValue });
+			this->firstDigit->Name = L"firstDigit";
+			this->firstDigit->Size = System::Drawing::Size(120, 49);
+			this->firstDigit->TabIndex = 14;
+			// 
+			// secondDigit
+			// 
+			this->secondDigit->DecimalPlaces = 2;
+			this->secondDigit->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 27.75F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->secondDigit->Location = System::Drawing::Point(378, 38);
+			this->secondDigit->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) { 99999999, 0, 0, 0 });
+			this->secondDigit->Minimum = System::Decimal(gcnew cli::array< System::Int32 >(4) { 99999999, 0, 0, System::Int32::MinValue });
+			this->secondDigit->Name = L"secondDigit";
+			this->secondDigit->Size = System::Drawing::Size(120, 49);
+			this->secondDigit->TabIndex = 15;
+			// 
 			// MyForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(785, 213);
+			this->Controls->Add(this->secondDigit);
+			this->Controls->Add(this->firstDigit);
 			this->Controls->Add(this->rslt_btn);
 			this->Controls->Add(this->Output);
-			this->Controls->Add(this->secondDigit);
 			this->Controls->Add(this->Operator);
-			this->Controls->Add(this->firstDigit);
 			this->Controls->Add(this->add_btn);
 			this->Controls->Add(this->sub_btn);
 			this->Controls->Add(this->mul_btn);
 			this->Controls->Add(this->div_btn);
 			this->Name = L"MyForm";
 			this->Text = L"Calculator";
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->firstDigit))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->secondDigit))->EndInit();
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
@@ -233,12 +245,13 @@ private: System::Void Operators(System::Object^ sender, System::EventArgs^ e) {
 		
 
 		if ((firstDigit->Text != "" && secondDigit->Text != "")) {
+
 			if (operators == "+") {
 				result = Double::Parse(firstDigit->Text) + Double::Parse(secondDigit->Text);
 				Operator->Text = operators;
 			}
 			else if (operators == "-") {
-				result = Double::Parse(firstDigit->Text) - Double::Parse(secondDigit->Text);
+				result = result = Double::Parse(firstDigit->Text) - Double::Parse(secondDigit->Text);
 				Operator->Text = operators;
 			}
 			else if (operators == "*") {
